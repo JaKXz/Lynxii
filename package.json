@@ -42,7 +42,6 @@
     ],
     "reporter": [
       "text-summary",
-      "html",
       "lcov"
     ],
     "sourceMap": true,
