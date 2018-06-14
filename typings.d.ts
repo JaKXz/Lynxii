@@ -32,4 +32,7 @@ declare module '@/package.json' {
 
   /** Project information for this package */
   export const project: PackageProjectEntry
+
+  /** The different scripts available to this package */
+  export const scripts: { [script: string]: string }
 }

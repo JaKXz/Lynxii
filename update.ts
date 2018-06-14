@@ -7,7 +7,6 @@ import { promises as fs, constants as fsConst } from 'fs'
 function generateEffectivePackage (name: string, overrides, keys): any {
   const eff = Object.assign({ }, keys, overrides)
   eff.version += '+' + name
-  delete eff.devDependencies
 
   return eff
 }
@@ -30,11 +29,14 @@ async function processProject (name: string) {
 
   const handle = await fs.open(pkgDir, fsConst.O_RDWR | fsConst.O_CREAT)
 
-  const currentPkg = JSON.parse((await fs.readFile(handle)).toString('utf-8'))
+  const currentPkg = JSON.parse((await handle.readFile()).toString('utf-8'))
   keys['dependencies'] = currentPkg.dependencies
+  keys['scripts'] = { start: pkg.scripts.__run + ' index.ts' }
   keys['name'] += '-' + name
 
-  await fs.writeFile(handle, JSON.stringify(generateEffectivePackage(name, overrides, keys), null, 2))
+  const data = Buffer.from(JSON.stringify(generateEffectivePackage(name, overrides, keys), null, 2) + '\n')
+  await handle.truncate(data.length)
+  await handle.writeFile(data)
   await handle.close()
 }
 
