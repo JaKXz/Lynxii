@@ -10,6 +10,29 @@ enum TestEnum {
 }
 
 describe('server/util/index', function () {
+  describe('DerivedError', function () {
+    describe('<init>', function () {
+      const err = new Error('test error')
+      const der = new util.DerivedError('test derived error', err)
+
+      it('should be caused by the given error', function () {
+        expect(der.cause).to.equal(err)
+      })
+
+      it('should create a double stack', function () {
+        expect(der.stack.length).to.be.greaterThan(err.stack.length)
+      })
+
+      it('should behave as a normal error without a cause', function () {
+        const msg = 'test derived error without cause'
+        const der2 = new util.DerivedError(msg)
+
+        expect(der2.message).to.equal(msg)
+        expect(der2.cause).to.be.undefined
+      })
+    })
+  })
+
   describe('noop()', function () {
     it('should do nothing', function () {
       expect(util.noop()).to.be.undefined

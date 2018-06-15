@@ -1,4 +1,4 @@
-import Block from 'lynxii-server/block/block'
+import { default as Block, BlockData } from 'lynxii-server/block/block'
 import { NodeMap } from 'lynxii-server/block/node'
 
 import { noop, generateUniqueID, idFormat } from 'lynxii-server/util'
@@ -70,6 +70,20 @@ describe('server/block/block', function () {
       it('should return itself', function () {
         const block = Block.from(id, desc)
         expect(block.initialize()).to.equal(block)
+      })
+    })
+
+    describe('send()', function () {
+      it('should emit an event with the given data', function (done) {
+        const block = Block.from(id, desc)
+
+        const [ index, data ] = [ 0, 'foo' ]
+        block.once(BlockData.Event.SEND, (sentIndex, sentData) => {
+          expect(sentIndex).to.equal(index)
+          expect(sentData).to.equal(data)
+          done()
+        })
+        block.send(index, data)
       })
     })
   })

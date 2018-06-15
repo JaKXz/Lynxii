@@ -27,6 +27,8 @@ export class DerivedError extends Error {
 
       let line: RegExpExecArray
       while (line = pat.exec(msg)) this.stack += '    ' + line + '\n'
+
+      this.cause = cause
     }
   }
 }
