@@ -144,7 +144,6 @@ export default class Block extends EventEmitter {
     * @param data      The data to send
     */
   send (nodeIndex: number, data) {
-    assert(nodeIndex >= 0 && nodeIndex < this.nodes.outputCount, 'Node index out of bounds')
     this.emit(BlockData.Event.SEND, nodeIndex, data)
   }
 
