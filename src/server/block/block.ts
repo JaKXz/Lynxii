@@ -10,7 +10,7 @@ export namespace BlockData {
     nodes: NodeInfo.Definition[]
 
     /** The function called to set up the block */
-    setupFunction: Function
+    setupFunction: (this: Block) => void
 
     /** The default value for the display name */
     defaultDisplayName: string
@@ -32,7 +32,7 @@ export namespace BlockData {
   }
 
   export interface Field {
-
+    
   }
 
   /** Different events on a given block */
