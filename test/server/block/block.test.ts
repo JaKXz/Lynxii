@@ -18,6 +18,19 @@ const uuid = generateUniqueID()
 const pos = { x: 45067, y: 1337 }
 
 describe('server/block/block', function () {
+  describe('RecieveError', function () {
+    describe('<init>', function () {
+      const b = Block.from(id, desc)
+      const re = new BlockData.RecieveError(b, 0, desc.defaultDisplayName)
+
+      it('should just define information given in the constructor', function () {
+        expect(re.block).to.equal(b)
+        expect(re.reason).to.equal(desc.defaultDisplayName)
+        expect(re.node).to.equal(0)
+      })
+    })
+  })
+
   describe('Block', function () {
     describe('static from()', function () {
       let block: Block
