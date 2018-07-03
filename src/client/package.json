@@ -1,8 +1,9 @@
 {
   "name": "lynxii-client",
-  "version": "0.0.1-dev+client",
+  "version": "0.1.0-beta.0+client",
+  "scripts": {},
   "productName": "Lynxii",
-  "description": "Simple and powerful dynamic communications network for your home, business, lab, or factory.",
+  "description": "A simple and powerful dynamic communications network.",
   "private": true,
   "main": "index.ts",
   "repository": {

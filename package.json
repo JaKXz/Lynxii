@@ -1,8 +1,8 @@
 {
   "name": "lynxii",
-  "version": "0.0.1-dev",
+  "version": "0.1.0-beta.0",
   "productName": "Lynxii",
-  "description": "Simple and powerful dynamic communications network for your home, business, lab, or factory.",
+  "description": "A simple and powerful dynamic communications network.",
   "private": true,
   "main": "index.ts",
   "scripts": {
@@ -14,19 +14,21 @@
     "clean:build": "yarn clean ./dist",
     "clean:coverage": "yarn clean ./coverage ./.nyc_output",
     "compile": "tsc && yarn license dist",
-    "copy:package": "copyfiles -u 1 src/*/package.json ./dist",
-    "enable:workspaces": "yarn config set workspaces-experimental true",
+    "copy:client": "yarn __copyinfo ./dist/client",
+    "copy:package": "copyfiles -u 1 src/**/package.json ./dist && yarn copy:server && yarn copy:client",
+    "copy:server": "yarn __copyinfo ./dist/server",
     "enable:debug:win": "set DEBUG=lynxii*",
     "enable:debug:nix": "export DEBUG=lynxii*",
     "license": "yarn __run license.ts",
-    "postinstall": "yarn update:project",
+    "preinstall": "yarn update:project",
     "start:server": "yarn __run server/index.ts",
     "test": "nyc mocha",
     "update": "yarn __run update.ts",
     "update:client": "yarn update client",
     "update:project": "yarn update:server && yarn update:client",
     "update:server": "yarn update server",
-    "__run": "node -r ts-node/register"
+    "__run": "node -r ts-node/register",
+    "__copyinfo": "copyfiles {LICENSE,README.md}"
   },
   "nyc": {
     "include": [
@@ -52,8 +54,6 @@
       ".js"
     ],
     "forwardedPackageKeys": [
-      "name",
-      "version",
       "productName",
       "description",
       "private",
@@ -65,14 +65,13 @@
       "bugs",
       "homepage"
     ],
-    "overridePackageKeys": {
+    "defaultConfig": {
       "server": {
-        "config": {
-          "host": "::1",
-          "port": 14300
-        }
+        "host": "::1",
+        "port": 14300
       }
-    }
+    },
+    "overridePackageKeys": { }
   },
   "repository": {
     "type": "git",

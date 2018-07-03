@@ -1,19 +1,20 @@
-/**
+/*!
   * Automatic license file header generation script for VevoxDigital/Lynxii.
   * This file is not intended for distribution
   */
+///<reference path="./index.d.ts"/>
+///<reference path="./workspace.d.ts"/>
 
+import * as path from 'path'
+import * as pkg from './package.json'
 
 import { promises as fs, Stats, constants as fsConst } from 'fs'
 import { execSync } from 'child_process'
-import * as path from 'path'
-import * as pkg from './package.json'
-import * as minimist from 'minimist'
 
 const commit = execSync('git rev-parse HEAD').toString('utf-8').substring(0, 7).toUpperCase()
 
 // the header
-const header = `/**
+const header = `/*!
  * Copyright ${new Date().getFullYear()} ${pkg.author} under "${pkg.license}". See the LICENSE file for more information.
  * Compiled ${new Date().toUTCString()} from ${commit}
  */
@@ -60,9 +61,7 @@ async function enterDirectory (dir: string, prefix: string) {
   }
 }
 
-const args = minimist(process.argv.slice(2))
-
-const dir = args._[0]
+const dir = process.argv.slice(2)[0]
 if (!dir) throw new Error('Must specifiy a directory')
 
 enterDirectory(path.resolve(__dirname, dir), dir).catch(console.error)
