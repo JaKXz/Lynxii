@@ -1,10 +1,11 @@
 import Block from '../block/block'
-import { Serializeable, SerializedObject } from '../util/serializeable'
 
+import { EventEmitter } from 'events'
+import { Serializeable, SerializedObject } from '../util/serializeable'
 import { generateUniqueID } from '../util'
 
 /** A Lynxii map */
-export default class BlockMap implements Serializeable {
+export default class BlockMap extends EventEmitter implements Serializeable {
   static deserialize (data: any): BlockMap {
     if (!isBlockMap(data)) throw new Error('Data is not a valid BlockMap')
     const map = new BlockMap(data.id)
@@ -18,6 +19,7 @@ export default class BlockMap implements Serializeable {
   private readonly blockMap: Map<string, Block> = new Map
 
   constructor (id: string = generateUniqueID()) {
+    super()
     this.id = id
   }
 
