@@ -1,8 +1,7 @@
 import Block from '../block/block'
 
 import { EventEmitter } from 'events'
-import { Serializeable, SerializedObject } from '../util/serializeable'
-import { generateUniqueID } from '../util'
+import { Serializeable, SerializedObject, generateUniqueID } from '../util'
 
 /** A Lynxii map */
 export default class BlockMap extends EventEmitter implements Serializeable {
