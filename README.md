@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="./res/banner.svg" height="200" alt="Lynxii" />
+  <img src="./res/lynxii.svg" height="200" alt="Lynxii" />
   <h3 align="center">Powerful and Programmable Smart-device Network</h3>
 </p>
 
