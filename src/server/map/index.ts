@@ -27,12 +27,15 @@ export default class BlockMap implements Serializeable {
     this.blockMap.set(uuid, block)
   }
 
-  serialize (): StringMap {
+  serialize (): SerializedBlockMap {
     const { id } = this
+    const blocks: Block[] = [ ]
     // TODO serialize blocks
 
     return {
-      id
+      _serializationID: BlockMap.constructor.name,
+      id,
+      blocks
     }
   }
 

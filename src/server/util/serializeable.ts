@@ -1,5 +1,6 @@
 /** An object that can be serialized into JSON */
 export interface Serializeable {
+  /** Serializes this object into JSON */
   serialize (): StringMap
 }
 
