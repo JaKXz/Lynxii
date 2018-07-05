@@ -33,7 +33,7 @@ export default class BlockMap implements Serializeable {
     // TODO serialize blocks
 
     return {
-      _serializationID: BlockMap.constructor.name,
+      _serializationID: BlockMap.name,
       id,
       blocks
     }
@@ -51,5 +51,5 @@ export interface SerializedBlockMap extends SerializedObject {
 
 /** A typeguard function that checks the serialized block map */
 export function isBlockMap (data: any): data is SerializedBlockMap {
-  return data._serializationID && data._serializationID === BlockMap.constructor.name
+  return data._serializationID && data._serializationID === BlockMap.name
 }
