@@ -6,7 +6,8 @@
 ///<reference path="./workspace.d.ts"/>
 
 import * as path from 'path'
-import * as pkg from 'package.json'
+import * as pkg from './package.json'
+import * as project from './project.json'
 
 import { promises as fs, Stats, constants as fsConst } from 'fs'
 import { execSync } from 'child_process'
@@ -22,7 +23,7 @@ const header = `/*!
 
 /** Determines if a given file has a valid extension */
 function hasExtension (file: string): boolean {
-  for (const ext of pkg.project.licenseExtensions) {
+  for (const ext of project.licenseExtensions) {
     if (file.endsWith(ext)) return true
   }
 
