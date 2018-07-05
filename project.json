@@ -1,0 +1,24 @@
+{
+  "licenseExtensions": [
+    ".js"
+  ],
+  "forwardedPackageKeys": [
+    "productName",
+    "description",
+    "private",
+    "main",
+    "repository",
+    "author",
+    "contributors",
+    "license",
+    "bugs",
+    "homepage"
+  ],
+  "defaultConfig": {
+    "server": {
+      "host": "::1",
+      "port": 14300
+    }
+  },
+  "overridePackageKeys": {}
+}

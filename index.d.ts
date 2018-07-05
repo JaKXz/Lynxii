@@ -8,8 +8,6 @@ declare interface StringMap extends TypedStringMap<any> { }
 
 declare namespace Package {
   interface Root {
-    [index: string]: any
-
     /** The package's internal name */
     readonly name: string
 
@@ -157,4 +155,9 @@ declare namespace Package {
     /** The URL of the repository */
     url: string;
   }
+}
+
+declare module '*/package.json' {
+  const pkg: Package.Root
+  export = pkg
 }

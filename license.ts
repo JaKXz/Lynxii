@@ -6,7 +6,7 @@
 ///<reference path="./workspace.d.ts"/>
 
 import * as path from 'path'
-import * as pkg from './package.json'
+import * as pkg from 'package.json'
 
 import { promises as fs, Stats, constants as fsConst } from 'fs'
 import { execSync } from 'child_process'
