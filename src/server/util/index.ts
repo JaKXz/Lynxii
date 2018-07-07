@@ -1,4 +1,5 @@
 import { v4 as generateUUID } from 'uuid'
+import { EventEmitter } from 'events'
 import createDebugLogger from './debug'
 
 const _debug = createDebugLogger('util')
@@ -10,6 +11,17 @@ export interface Point {
 
   /** The Y value of the position */
   y: number
+}
+
+/** An object's class */
+export interface Class<T> {
+  [func: string]: string | ((...any) => any)
+
+  /** The object's name */
+  readonly name: string
+
+  /** Creates a new instance of this object */
+  new(...any): T
 }
 
 /** An error that was caused by another */
@@ -30,6 +42,21 @@ export class DerivedError extends Error {
 
       this.cause = cause
     }
+  }
+}
+
+/** A generic Lynxii object */
+export abstract class LynxiiObject extends EventEmitter implements UniquelyIdentifiable {
+  /** A unique ID for this object */
+  public id: string
+
+  constructor (id: string) {
+    super()
+    this.id = id
+  }
+
+  toString(): string {
+    return `${this.constructor.name}[${this.id}]`
   }
 }
 

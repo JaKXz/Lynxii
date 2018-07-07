@@ -1,8 +1,7 @@
-import { EventEmitter } from 'events'
 import * as util from '../util'
 
 /** A Lynxii block object */
-export default class Block extends EventEmitter implements util.Serializeable, util.UniquelyIdentifiable {
+export default class Block extends util.LynxiiObject implements util.Serializeable, util.UniquelyIdentifiable {
   /** Attempt to deserialize the given data into a block */
   static deserialize (data: any): Block {
     if (!util.isDeserializableTo<SerializedBlock>(data, Block.name)) throw new util.DeserializationError(Block.name)
@@ -11,11 +10,8 @@ export default class Block extends EventEmitter implements util.Serializeable, u
     return block
   }
 
-  public readonly id: string
-
   constructor (id: string = util.generateUniqueID()) {
-    super()
-    this.id = id
+    super(id)
   }
 
   serialize (): SerializedBlock {
