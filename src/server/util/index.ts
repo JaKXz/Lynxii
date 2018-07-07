@@ -69,3 +69,14 @@ export interface SerializedObject {
   /** The constructor ID for the Lynxii object */
   _serializationID: string
 }
+
+export class DeserializationError extends Error {
+  constructor (name: string) {
+    super('Given data cannot be deserialized into ' + name)
+  }
+}
+
+/** Determines if the given data can be deserialized to the given type */
+export function isDeserializableTo<T extends SerializedObject> (data: any, serialID: string): data is T {
+  return data._serializationID === serialID
+}

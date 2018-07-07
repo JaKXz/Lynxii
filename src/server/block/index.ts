@@ -1,11 +1,19 @@
-import { Serializeable, SerializedObject, UniquelyIdentifiable, generateUniqueID } from '../util'
 import { EventEmitter } from 'events'
+import * as util from '../util'
 
 /** A Lynxii block object */
-export default class Block extends EventEmitter implements Serializeable, UniquelyIdentifiable {
+export default class Block extends EventEmitter implements util.Serializeable, util.UniquelyIdentifiable {
+  /** Attempt to deserialize the given data into a block */
+  static deserialize (data: any): Block {
+    if (!util.isDeserializableTo<SerializedBlock>(data, Block.name)) throw new util.DeserializationError(Block.name)
+
+    const block = new Block(data.id)
+    return block
+  }
+
   public readonly id: string
 
-  constructor (id: string = generateUniqueID()) {
+  constructor (id: string = util.generateUniqueID()) {
     super()
     this.id = id
   }
@@ -21,10 +29,6 @@ export default class Block extends EventEmitter implements Serializeable, Unique
 }
 
 /** A serialized block */
-export interface SerializedBlock extends SerializedObject {
+export interface SerializedBlock extends util.SerializedObject {
   id: string
-}
-
-export function isBlock (data: any): data is Block {
-  return data._serializationID && data._serializationID === Block.name
 }
