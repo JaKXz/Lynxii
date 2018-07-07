@@ -9,6 +9,11 @@
     <img alt="version"
       src="http://vevox.io:3002/github/release/VevoxDigital/Lynxii.svg?style=for-the-badge">
   </a>
+  <a href="Lynxii/commits/master">
+    <img
+      src="http://vevox.io:3002/github/last-commit/VevoxDigital/Lynxii.svg?style=for-the-badge"
+      alt="version">
+  </a>
   <a href="https://travis-ci.org/VevoxDigital/Lynxii">
     <img alt="travis"
       src="http://vevox.io:3002/travis/VevoxDigital/Lynxii.svg?style=for-the-badge">
