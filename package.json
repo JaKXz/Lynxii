@@ -20,7 +20,7 @@
     "enable:debug:win": "set DEBUG=lynxii*",
     "enable:debug:nix": "export DEBUG=lynxii*",
     "license": "yarn __run license.ts",
-    "preinstall": "yarn add ts-node --ignore-scripts -W -D && yarn update:project",
+    "preinstall": "yarn --ignore-scripts -W && yarn update:project",
     "start:server": "yarn __run server/index.ts",
     "test": "nyc mocha",
     "update": "yarn __run update.ts",
@@ -67,8 +67,7 @@
   },
   "homepage": "https://vevox.io/lynxii",
   "workspaces": [
-    "src/server",
-    "src/client"
+    "src/*"
   ],
   "dependencies": {
     "debug": "^3.1.0"
