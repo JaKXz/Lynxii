@@ -1,4 +1,5 @@
 /// <reference types="debug" />
+/// <reference path="../../../index.d.ts"/>
 import * as debug from 'debug'
 import * as pkg from '../package.json'
 
