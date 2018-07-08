@@ -1,6 +1,9 @@
-import createDebugLogger from './util/debug'
+import { createDebuggerFor } from 'lynxii-core/util/debug'
+import * as pkg from './package.json'
+import logger from 'lynxii-core/util/logger'
 
-const _debug = createDebugLogger('init')
+logger.createDebugger = (name: string, ...ns: string[]) => createDebuggerFor(pkg.name, ...[ name ].concat(ns))
+const _debug = logger.createDebugger('init')
 
-console.info('setting up, just a moment...')
+logger.info('setting up, just a moment...')
 _debug('start init')

@@ -1,8 +1,10 @@
+///<reference path="../../../index.d.ts"/>
+
 import { v4 as generateUUID } from 'uuid'
 import { EventEmitter } from 'events'
-import createDebugLogger from './debug'
+import logger from 'lynxii-core/util/logger'
 
-const _debug = createDebugLogger('util')
+const _debug = logger.createDebugger('util')
 
 /** A point in space (or, in this case, on a map) */
 export interface Point {

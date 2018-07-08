@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/VevoxDigital/Lynxii/issues"
   },
-  "homepage": "https://vevox.io/lynxii"
+  "homepage": "https://vevox.io/lynxii",
+  "dependencies": {
+    "winston": "^3.0.0"
+  }
 }
