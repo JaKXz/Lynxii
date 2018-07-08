@@ -7,17 +7,11 @@ engines:
     checks:
       Similar code: # This thing throws false positives like crazy.
         enabled: false
-    exclude_paths:
-    - test/ # Please stop looking for duplicates in tests
-    - Gruntfile.js # Really...?
     config:
       languages:
       - javascript
   eslint:
     enabled: true
-    exclude_paths:
-    - test/ # Stop linting my tests, damnit
-    - Gruntfile.js
   fixme:
     enabled: true
   scss-lint:
@@ -25,3 +19,7 @@ engines:
 ratings:
   paths:
   - 'src/**'
+exclude_patterns:
+- 'Gruntfile.js'
+- 'test/'
+- '**/vendor/'
