@@ -17,6 +17,7 @@ engines:
     enabled: true
     exclude_paths:
     - test/ # Stop linting my tests, damnit
+    - Gruntfile.js
   fixme:
     enabled: true
   scss-lint:
