@@ -42,7 +42,7 @@ async function processProject (projectName: string) {
     dependencies: current.dependencies,
     devDependencies: current.devDependencies,
     scripts: {
-      // TODO
+      start: 'node index'
     },
     config,
     ...forwards,

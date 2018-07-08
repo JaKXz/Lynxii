@@ -10,15 +10,14 @@
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "jsx": "react",
-    "moduleResolution": "node",
-    "types": [ "node" ]
+    "moduleResolution": "node"
   },
   "exclude": [
     "dist/",
     "res/",
     "doc/",
     "coverage/",
-    "node_modules/",
+    "node_modules/*",
     "test/",
     "license.ts",
     "update.ts"
