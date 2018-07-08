@@ -107,6 +107,10 @@ exports = module.exports = grunt => {
         cmd: 'yarn exec:script update.ts client',
         stdout: 'inherit'
       },
+      update_core: {
+        cmd: 'yarn exec:script update.ts core',
+        stdout: 'inherit'
+      },
       license: {
         cmd: 'yarn exec:script license.ts dist',
         stdout: 'inherit'
@@ -132,7 +136,7 @@ exports = module.exports = grunt => {
   ])
   grunt.registerTask('tsc', [ 'exec:tsc' ])
   grunt.registerTask('nyc', [ 'exec:nyc' ])
-  grunt.registerTask('update', [ 'exec:update_server', 'exec:update_client' ])
+  grunt.registerTask('update', [ 'exec:update_server', 'exec:update_client', 'exec:update_core' ])
   grunt.registerTask('license', [ 'exec:license' ])
   grunt.registerTask('test', [ 'nyc' ])
 
