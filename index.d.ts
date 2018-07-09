@@ -161,3 +161,8 @@ declare module '*/package.json' {
   const pkg: Package.Root
   export = pkg
 }
+
+declare module 'jsonpack' {
+  export const pack: (json: string | object) => string
+  export const unpack: (packed: string) => object
+}

@@ -16,7 +16,7 @@
     "exec:script": "node -r ts-node/register",
     "exec:tsc": "tsc",
     "preinstall": "yarn --ignore-scripts -W && grunt update",
-    "start:server": "yarn exec:script server/index.ts",
+    "start:server": "yarn exec:script src/server/index.ts",
     "test": "yarn build"
   },
   "nyc": {
