@@ -11,7 +11,7 @@
   </a>
   <a href="Lynxii/commits/master">
     <img
-      src="http://vevox.io:3002/github/last-commit/VevoxDigital/Lynxii.svg?style=for-the-badge"
+      src="http://vevox.io:3002/github/last-commit/VevoxDigital/Lynxii.svg?style=for-the-badge&label=active"
       alt="version">
   </a>
   <a href="https://travis-ci.org/VevoxDigital/Lynxii">
@@ -20,7 +20,7 @@
   </a>
   <a href="https://codeclimate.com/github/VevoxDigital/Lynxii">
     <img alt="travis"
-      src="http://vevox.io:3002/codeclimate/maintainability-percentage/VevoxDigital/Lynxii.svg?style=for-the-badge">
+      src="http://vevox.io:3002/codeclimate/maintainability-percentage/VevoxDigital/Lynxii.svg?style=for-the-badge&label=upkeep">
   </a>
   <a href="https://codeclimate.com/github/VevoxDigital/Lynxii">
     <img alt="travis"
