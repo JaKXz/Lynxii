@@ -46,9 +46,8 @@ export function createGlobalLogger (logDir: string, maxFiles?: number): GlobalLo
   return logger
 }
 
-/** Creates a new winston logger */
-function initLogger (dir: string, maxFiles?: number, ns?: string): Logger {
-  const logger = winston.createLogger({
+function generateWinstonLogger (dir: string, maxFiles?: number, ns?: string): winston.Logger {
+  return winston.createLogger({
     level: 'info',
     format: winston.format.combine(
       winston.format.colorize(),
@@ -66,7 +65,12 @@ function initLogger (dir: string, maxFiles?: number, ns?: string): Logger {
         zippedArchive: true
       })
     ]
-  }) as Logger
+  })
+}
+
+/** Creates a new winston logger */
+function initLogger (dir: string, maxFiles?: number, ns?: string): Logger {
+  const logger = generateWinstonLogger(dir, maxFiles) as Logger
 
   logger.createSublogger = (ns: string): Logger => {
     const subLogger = initLogger(dir, maxFiles, ns + ':ns')
