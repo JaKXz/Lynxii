@@ -70,10 +70,10 @@ function generateWinstonLogger (dir: string, maxFiles?: number, ns?: string): wi
 
 /** Creates a new winston logger */
 function initLogger (dir: string, maxFiles?: number, ns?: string): Logger {
-  const logger = generateWinstonLogger(dir, maxFiles) as Logger
+  const logger = generateWinstonLogger(dir, maxFiles, ns) as Logger
 
   logger.createSublogger = (ns: string): Logger => {
-    const subLogger = initLogger(dir, maxFiles, ns + ':ns')
+    const subLogger = initLogger(dir, maxFiles, logger.namespace ? `${logger.namespace}:${ns}` : ns)
     subLogger.parent = logger
     return subLogger
   }
