@@ -1,6 +1,9 @@
 {
   "name": "lynxii-core",
   "version": "0.1.0-beta.0+core",
+  "dependencies": {
+    "winston": "^3.0.0"
+  },
   "scripts": {
     "start": "node index"
   },
@@ -24,8 +27,5 @@
   "bugs": {
     "url": "https://github.com/VevoxDigital/Lynxii/issues"
   },
-  "homepage": "https://vevox.io/lynxii",
-  "dependencies": {
-    "winston": "^3.0.0"
-  }
+  "homepage": "https://vevox.io/lynxii"
 }

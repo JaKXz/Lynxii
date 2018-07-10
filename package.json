@@ -67,6 +67,7 @@
     "@types/mocha": "^5.2.1",
     "@types/node": "^10.3.1",
     "chai": "^4.1.2",
+    "fs-mock": "^1.2.1",
     "grunt": "^1.0.3",
     "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-compress": "^1.4.3",
