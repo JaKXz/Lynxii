@@ -21,11 +21,11 @@ async function main (): Promise<void> {
   const dataDir = join(process.cwd(), Constants.Directories.SERVER_DATA)
   const databasePath = resolve(dataDir, databaseName)
 
-  if (args.create) {
-    await LynxiiDatabase.init(databasePath)
-    logger.info('database initialized successfully')
-    return
-  }
+  const db = await LynxiiDatabase.open(databasePath)
+  await db.write()
+  logger.info('database initialized successfully, created ' + db.createdString)
+
+  await db.close()
 }
 
 main().catch(console.error)
