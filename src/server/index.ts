@@ -1,6 +1,6 @@
 import { createDebuggerFor } from 'lynxii-core/util/debug'
 import { Constants } from 'lynxii-core'
-import { resolve, join } from 'path'
+import { join } from 'path'
 import * as pkg from './package.json'
 import * as minimist from 'minimist'
 import LynxiiDatabase from './util/database'
@@ -17,11 +17,8 @@ async function main (): Promise<void> {
   _debug('main start')
   logger.info('setting up, just a moment...')
 
-  const databaseName = args.database || LynxiiDatabase.DEFAULT_NAME
-  const dataDir = join(process.cwd(), Constants.Directories.SERVER_DATA)
-  const databasePath = resolve(dataDir, databaseName)
-
-  const db = await LynxiiDatabase.open(databasePath)
+  const databaseName = args.database || join(Constants.Directories.SERVER_DATA, LynxiiDatabase.DEFAULT_NAME)
+  const db = await LynxiiDatabase.open(databaseName)
   await db.write()
   logger.info('database initialized successfully, created ' + db.createdString)
 
