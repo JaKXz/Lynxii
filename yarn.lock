@@ -6,9 +6,19 @@
   version "4.1.3"
   resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.1.3.tgz#b8a74352977a23b604c01aa784f5b793443fb7dc"
 
+"@types/cson@^0.0.31":
+  version "0.0.31"
+  resolved "https://registry.yarnpkg.com/@types/cson/-/cson-0.0.31.tgz#ad0c475a6b3736cecd9b754eae53a5ae8a6df891"
+
 "@types/debug@^0.0.30":
   version "0.0.30"
   resolved "https://registry.yarnpkg.com/@types/debug/-/debug-0.0.30.tgz#dc1e40f7af3b9c815013a7860e6252f6352a84df"
+
+"@types/grunt@^0.4.23":
+  version "0.4.23"
+  resolved "https://registry.yarnpkg.com/@types/grunt/-/grunt-0.4.23.tgz#4057d91b0766bf56ce4cf0c0e5efb8e74c687c9c"
+  dependencies:
+    "@types/node" "*"
 
 "@types/minimist@^1.2.0":
   version "1.2.0"
@@ -362,6 +372,10 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
 
+coffee-script@^1.10.0, coffee-script@^1.12.7:
+  version "1.12.7"
+  resolved "https://registry.yarnpkg.com/coffee-script/-/coffee-script-1.12.7.tgz#c05dae0cb79591d05b3070a8433a98c9a89ccc53"
+
 coffeescript@~1.10.0:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/coffeescript/-/coffeescript-1.10.0.tgz#e7aa8301917ef621b35d8a39f348dcdd1db7e33e"
@@ -464,6 +478,23 @@ cryptiles@2.x.x:
   dependencies:
     boom "2.x.x"
 
+cson-parser@^1.3.4:
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/cson-parser/-/cson-parser-1.3.5.tgz#7ec675e039145533bf2a6a856073f1599d9c2d24"
+  dependencies:
+    coffee-script "^1.10.0"
+
+cson@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/cson/-/cson-5.1.0.tgz#d62e236decb8b742859068918e9c03d578e00f89"
+  dependencies:
+    coffee-script "^1.12.7"
+    cson-parser "^1.3.4"
+    editions "^1.3.3"
+    extract-opts "^3.3.1"
+    requirefresh "^2.1.0"
+    safefs "^4.1.0"
+
 currently-unhandled@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/currently-unhandled/-/currently-unhandled-0.4.1.tgz#988df33feab191ef799a61369dd76c17adf957ea"
@@ -547,11 +578,22 @@ diff@3.5.0, diff@^3.1.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/diff/-/diff-3.5.0.tgz#800c0dd1e0a8bfbc95835c202ad220fe317e5a12"
 
+eachr@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/eachr/-/eachr-3.2.0.tgz#2c35e43ea086516f7997cf80b7aa64d55a4a4484"
+  dependencies:
+    editions "^1.1.1"
+    typechecker "^4.3.0"
+
 ecc-jsbn@~0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/ecc-jsbn/-/ecc-jsbn-0.1.1.tgz#0fc73a9ed5f0d53c38193398523ef7e543777505"
   dependencies:
     jsbn "~0.1.0"
+
+editions@^1.1.1, editions@^1.3.3, editions@^1.3.4:
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/editions/-/editions-1.3.4.tgz#3662cb592347c3168eb8e498a0ff73271d67f50b"
 
 enabled@1.0.x:
   version "1.0.2"
@@ -627,6 +669,14 @@ extend-shallow@^1.1.2:
 extend@~3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.1.tgz#a755ea7bc1adfcc5a31ce7e762dbaadc5e636444"
+
+extract-opts@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/extract-opts/-/extract-opts-3.3.1.tgz#5abbedc98c0d5202e3278727f9192d7e086c6be1"
+  dependencies:
+    eachr "^3.2.0"
+    editions "^1.1.1"
+    typechecker "^4.3.0"
 
 extsprintf@1.3.0:
   version "1.3.0"
@@ -774,7 +824,7 @@ glob@~7.0.0:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
-graceful-fs@^4.1.0, graceful-fs@^4.1.2:
+graceful-fs@^4.1.0, graceful-fs@^4.1.2, graceful-fs@^4.1.4:
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
 
@@ -1665,6 +1715,12 @@ repeating@^2.0.0:
     tunnel-agent "^0.6.0"
     uuid "^3.0.0"
 
+requirefresh@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/requirefresh/-/requirefresh-2.1.0.tgz#742dccc20f3a96918d66c6f1597dc8ffebc4f6f5"
+  dependencies:
+    editions "^1.1.1"
+
 resolve-from@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-2.0.0.tgz#9480ab20e94ffa1d9e80a804c7ea147611966b57"
@@ -1694,6 +1750,13 @@ rimraf@2, rimraf@^2.5.1, rimraf@~2.6.2:
 safe-buffer@^5.0.1, safe-buffer@^5.1.1, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
+
+safefs@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/safefs/-/safefs-4.1.0.tgz#f82aeb4bdd7ae51f653eb20f6728b3058c8d6445"
+  dependencies:
+    editions "^1.1.1"
+    graceful-fs "^4.1.4"
 
 "safer-buffer@>= 2.1.2 < 3", safer-buffer@^2.0.2:
   version "2.1.2"
@@ -1996,6 +2059,12 @@ type-check@~0.3.2:
 type-detect@^4.0.0:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/type-detect/-/type-detect-4.0.8.tgz#7646fb5f18871cfbb7749e69bd39a6388eb7450c"
+
+typechecker@^4.3.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/typechecker/-/typechecker-4.5.0.tgz#c382920097812364bbaf4595b0ab6588244117a6"
+  dependencies:
+    editions "^1.3.4"
 
 typescript@^2.9.1:
   version "2.9.1"

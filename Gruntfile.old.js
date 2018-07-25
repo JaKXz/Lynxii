@@ -1,17 +1,23 @@
-const infoCopy = '{README.md,LICENSE}'
+
+const CSON = require('cson')
+const fs = require('fs')
 
 exports = module.exports = grunt => {
+  // Set up the pre-config
   require('time-grunt')(grunt)
   require('load-grunt-tasks')(grunt)
+
+  // load project configuration
+  const projectConfig = CSON.parse(fs.readFileSync('./project.cson'))
 
   grunt.initConfig({
     // Cleanup
     clean: {
-      temp: [
-        '.nyc_output',
+      general: [
+        '.cache',
         '.tmp'
       ],
-      dist: [
+      build: [
         'dist'
       ],
       errors: [

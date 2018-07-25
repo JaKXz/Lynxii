@@ -1,0 +1,14 @@
+# Project Build Configuration
+build:
+  # Where to output to
+  output: 'dist'
+
+  # Directories to use
+  dirs:
+    compiled: 'compiled'
+    target: 'target'
+
+  # Build targets
+  targets:
+    server:
+      modes: [ 'zip', 'tgz' ]
