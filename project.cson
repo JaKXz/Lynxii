@@ -24,3 +24,27 @@ license:
     '.js',
     '.d.ts'
   ]
+
+modules:
+  forwards: [
+    'productName'
+    'description'
+    'private'
+    'main'
+    'repository'
+    'author'
+    'contributors'
+    'license'
+    'bugs'
+    'homepage'
+  ]
+  overrides: {}
+  scripts: {}
+  config:
+    server:
+      host: '::1'
+      port: 45067
+  links:
+    server: [
+      'common'
+    ]

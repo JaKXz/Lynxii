@@ -1,12 +1,6 @@
 {
   "name": "lynxii-core",
   "version": "0.1.0-beta.0+core",
-  "dependencies": {
-    "winston": "^3.0.0"
-  },
-  "scripts": {
-    "start": "node index"
-  },
   "productName": "Lynxii",
   "description": "A simple and powerful dynamic communications network.",
   "private": true,
@@ -27,5 +21,15 @@
   "bugs": {
     "url": "https://github.com/VevoxDigital/Lynxii/issues"
   },
-  "homepage": "https://vevox.io/lynxii"
+  "homepage": "https://vevox.io/lynxii",
+  "scripts": {
+    "start": "node ."
+  },
+  "config": {
+    "name": "lynxii-core",
+    "config": {}
+  },
+  "dependencies": {
+    "winston": "^3.0.0"
+  }
 }

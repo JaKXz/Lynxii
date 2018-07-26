@@ -1,70 +1,109 @@
-///<reference path="./index.d.ts"/>
-///<reference path="./workspace.d.ts" />
+
+// tslint:disable:no-console
+
+/// <reference path="./project.d.ts" />
 
 import * as pkg from './package.json'
-import * as project from './project.json'
-import * as path from 'path'
 
-import { promises as fs, constants as fsConst } from 'fs'
+import { parse } from 'cson'
+import { constants as fsConst, promises as fs, readFileSync } from 'fs'
+import * as glob from 'glob'
+import { basename, join } from 'path'
+import { promisify } from 'util'
 
-/** Verifies a valid package.json exists for the given project */
-async function verifyPackage (projectName: string): Promise<string> {
-  const dir = path.join(__dirname, 'src', projectName)
-  const stats = await fs.stat(dir)
-  if (!stats.isDirectory()) throw new Error ('ENOTDIR: Given project is not a directory')
-  const pkgDir = path.join(dir, 'package.json')
-  const pkgStats = await fs.stat(pkgDir)
-  if (!pkgStats.isFile()) throw new Error('ENOTFILE: Given project\'s package is not a file')
+const project = parse(readFileSync('./project.cson').toString('utf8')) as Project
+const { modules } = project
 
-  return pkgDir
-}
-
-function generateNewPackage (current: Package.Root): Package.Root {
-  // get package data
-  const newName = `${pkg.name}-${projectName}`
-  const overrides = project.overridePackageKeys[projectName] || { }
-  const forwardedKeys = project.forwardedPackageKeys || [ ]
-  const forwards: StringMap = { }
-  for (const forwardedKey of forwardedKeys) forwards[forwardedKey] = pkg[forwardedKey]
-  const config: StringMap = project.defaultConfig[projectName]
-    ? {
-      name: newName,
-      config: project.defaultConfig[projectName]
-    } : undefined
-
-  // create the new package
-  return {
-    name: newName,
-    version: `${pkg.version}+${projectName}`,
-    dependencies: current.dependencies,
-    devDependencies: current.devDependencies,
-    scripts: {
-      start: 'node index'
-    },
-    config,
-    ...forwards,
-    ...overrides
+/**
+ * Fetches all directories (ignores files) within the given directory
+ * @param dir The directory to look in
+ * @returns The directories found
+ */
+async function fetchDirs (paths: string[]): Promise<string[]> {
+  const dirs = [ ]
+  for (const file of paths) {
+    try {
+      const stats = await fs.stat(file)
+      if (stats.isDirectory()) dirs.push(file)
+    } catch (err) {
+      /* no-op */
+    }
   }
+  return dirs
 }
 
-/** Processes the given project */
-async function processProject (projectName: string) {
-  console.log(`processing project: ${projectName}`)
-  const pkgDir = await verifyPackage(projectName)
+/**
+ * Processes the given module directory, updating the package as necessary
+ * @param dir The directory of the module
+ */
+async function processModule (dir: string): Promise<void> {
+  const moduleName = basename(dir)
+  console.info('processing:', dir)
 
-  // create the handle for the file
-  const handle = await fs.open(pkgDir, fsConst.O_RDWR)
-  const current = JSON.parse((await handle.readFile()).toString('utf-8')) as Package.Root
+  const packagePath = join(dir, 'package.json')
+  const packageStats = await fs.stat(packagePath)
+  if (!packageStats.isFile()) throw new Error('ENOTFILE: Given project\'s package is not a file')
 
-  const newPackage = generateNewPackage(current)
+  const handle = await fs.open(packagePath, fsConst.O_RDWR | fsConst.O_CREAT)
+  const bufferIn = await handle.readFile()
+  const currentPackage = JSON.parse(bufferIn.toString('utf-8')) as Package.Root
 
-  // write the new package to disk and close the handle
+  const forwards: Package.Root = {
+    name: `${pkg.name}-${moduleName}`,
+    version: `${pkg.version}+${moduleName}`
+  }
+  for (const key of modules.forwards) forwards[key] = pkg[key]
+
+  const links = modules.links[moduleName]
+  let peerDependencies: TypedStringMap<string> | undefined
+  if (links) {
+    peerDependencies = { }
+    for (const link of links) peerDependencies[`${pkg.name}-${link}`] = pkg.version
+  }
+
+  const literals = modules.overrides[moduleName] || { }
+  const scripts = modules.scripts[moduleName] || { }
+
+  // tslint:disable:object-literal-sort-keys
+  const newPackage: Package.Root = {
+    ...forwards,
+    ...literals,
+    scripts: {
+      start: 'node .',
+      ...scripts
+    },
+    config: {
+      name: forwards.name,
+      config: modules.config[moduleName] || { }
+    },
+    peerDependencies,
+    dependencies: currentPackage.dependencies,
+    devDependencies: currentPackage.devDependencies
+  }
+  // tslint:enable:object-literal-sort-keys
+
   const data = Buffer.from(JSON.stringify(newPackage, null, 2) + '\n')
-  await handle.truncate(data.length)
+  if (data.length < bufferIn.length) await handle.truncate(data.length)
   await handle.writeFile(data)
   await handle.close()
 }
 
-const projectName = process.argv.slice(2)[0]
-if (!projectName) throw new Error('A project name must be provided')
-processProject(projectName).catch(console.error)
+/**
+ * Starts the update process on all workspaces registered to `yarn`.
+ */
+async function update (): Promise<void> {
+  if (pkg.workspaces) {
+    let moduleNames: string[] = [ ]
+    for (const pattern of pkg.workspaces) {
+      const results = await promisify(glob)(pattern)
+      moduleNames = moduleNames.concat(await fetchDirs(results))
+    }
+
+    for (const moduleName of moduleNames) await processModule(moduleName)
+  }
+}
+
+update().catch(err => {
+  console.error(err)
+  process.exit(1)
+})

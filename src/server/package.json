@@ -1,26 +1,6 @@
 {
   "name": "lynxii-server",
   "version": "0.1.0-beta.0+server",
-  "dependencies": {
-    "debug": "^3.1.0",
-    "jsonpack": "^1.1.5",
-    "minimist": "^1.2.0",
-    "uuid": "^3.2.1"
-  },
-  "devDependencies": {
-    "@types/minimist": "^1.2.0",
-    "@types/uuid": "^3.4.3"
-  },
-  "scripts": {
-    "start": "node index"
-  },
-  "config": {
-    "name": "lynxii-server",
-    "config": {
-      "host": "::1",
-      "port": 14300
-    }
-  },
   "productName": "Lynxii",
   "description": "A simple and powerful dynamic communications network.",
   "private": true,
@@ -41,5 +21,28 @@
   "bugs": {
     "url": "https://github.com/VevoxDigital/Lynxii/issues"
   },
-  "homepage": "https://vevox.io/lynxii"
+  "homepage": "https://vevox.io/lynxii",
+  "scripts": {
+    "start": "node ."
+  },
+  "config": {
+    "name": "lynxii-server",
+    "config": {
+      "host": "::1",
+      "port": 45067
+    }
+  },
+  "peerDependencies": {
+    "lynxii-common": "0.1.0-beta.0"
+  },
+  "dependencies": {
+    "debug": "^3.1.0",
+    "jsonpack": "^1.1.5",
+    "minimist": "^1.2.0",
+    "uuid": "^3.2.1"
+  },
+  "devDependencies": {
+    "@types/minimist": "^1.2.0",
+    "@types/uuid": "^3.4.3"
+  }
 }

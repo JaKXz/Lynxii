@@ -48,7 +48,7 @@ declare namespace Package {
     readonly bin?: string | TypedStringMap<string>
 
     /** Documentation for this pacakage */
-    readonly man?: string|string[]
+    readonly man?: string | string[]
 
     /** The location of certain package directories */
     readonly directories?: Package.Directories
@@ -94,6 +94,9 @@ declare namespace Package {
 
     /** Speciallized configuration for publishing */
     readonly publishConfig?: Package.PublishConfig
+
+    /** A list of workspace globs for yarn */
+    readonly workspaces?: string[]
   }
 
   interface Author {
@@ -120,17 +123,17 @@ declare namespace Package {
 
   /** The location of certain package directories */
   interface Directories {
-    lib?: string;
-    bin?: string;
-    man?: string;
-    doc?: string;
-    example?: string;
+    lib?: string
+    bin?: string
+    man?: string
+    doc?: string
+    example?: string
   }
 
   /** The engines this package is designed for */
   interface Engines {
-    node?: string;
-    npm?: string;
+    node?: string
+    npm?: string
   }
 
   /** The configuration data managed by NPM */
@@ -144,16 +147,16 @@ declare namespace Package {
 
   /** The publishing configuration this package */
   interface PublishConfig {
-    registry?: string;
+    registry?: string
   }
 
   /** A project repository */
   interface Repository {
     /** The type of repository */
-    type: string;
+    type: string
 
     /** The URL of the repository */
-    url: string;
+    url: string
   }
 }
 

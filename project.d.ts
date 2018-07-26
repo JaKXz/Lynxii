@@ -21,7 +21,16 @@ declare interface ProjectLicense {
   extensions: string[]
 }
 
+declare interface ProjectModules {
+  forwards: string[]
+  overrides: TypedStringMap<StringMap>
+  scripts: TypedStringMap<TypedStringMap<string>>
+  config: TypedStringMap<StringMap>
+  links: TypedStringMap<string[]>
+}
+
 declare interface Project {
   build: ProjectBuild
   license: ProjectLicense
+  modules: ProjectModules
 }

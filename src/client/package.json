@@ -1,9 +1,6 @@
 {
   "name": "lynxii-client",
   "version": "0.1.0-beta.0+client",
-  "scripts": {
-    "start": "node index"
-  },
   "productName": "Lynxii",
   "description": "A simple and powerful dynamic communications network.",
   "private": true,
@@ -24,5 +21,12 @@
   "bugs": {
     "url": "https://github.com/VevoxDigital/Lynxii/issues"
   },
-  "homepage": "https://vevox.io/lynxii"
+  "homepage": "https://vevox.io/lynxii",
+  "scripts": {
+    "start": "node ."
+  },
+  "config": {
+    "name": "lynxii-client",
+    "config": {}
+  }
 }
