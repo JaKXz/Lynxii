@@ -12,12 +12,12 @@
     "add:server": "yarn workspace lynxii-server add",
     "build": "grunt build",
     "clean": "grunt clean:all",
-    "exec:nyc": "nyc mocha",
-    "exec:script": "node -r ts-node/register",
-    "exec:tsc": "tsc",
+    "grunt": "yarn gruntfile && grunt",
+    "gruntfile": "tsc Gruntfile.ts",
     "__preinstall": "yarn --ignore-scripts -W && grunt update",
     "start:server": "yarn exec:script src/server/index.ts",
-    "test": "yarn build"
+    "test": "yarn build",
+    "tsexec": "node -r ts-node/register"
   },
   "nyc": {
     "include": [

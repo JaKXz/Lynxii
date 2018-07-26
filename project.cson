@@ -3,6 +3,9 @@ build:
   # Where to output to
   output: 'dist'
 
+  # The coverage directory
+  coverage: 'coverage'
+
   # Directories to use
   dirs:
     compiled: 'compiled'
@@ -11,4 +14,6 @@ build:
   # Build targets
   targets:
     server:
-      modes: [ 'zip', 'tgz' ]
+      modes:
+        tgz: 'tar.gz'
+        zip: 'zip'

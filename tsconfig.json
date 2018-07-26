@@ -2,7 +2,6 @@
   "compilerOptions": {
     "baseUrl": "./",
     "rootDir": "./src",
-    "outDir": "./dist",
     "target": "es6",
     "sourceMap": false,
     "inlineSourceMap": true,
@@ -20,6 +19,7 @@
     "node_modules/*",
     "test/",
     "license.ts",
-    "update.ts"
+    "update.ts",
+    "Gruntfile.ts"
   ]
 }

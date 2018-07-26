@@ -9,6 +9,7 @@ node_modules/
 logs/
 
 # Configuration
+Gruntfile.js
 config.json
 
 # Tests & Coverage

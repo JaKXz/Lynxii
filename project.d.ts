@@ -7,11 +7,12 @@ declare interface ProjectBuildDirs {
 }
 
 declare interface ProjectBuildTarget {
-  modes: string[]
+  modes: TypedStringMap<string>
 }
 
 declare interface ProjectBuild {
   output: string
+  coverage: string
   dirs: ProjectBuildDirs
   targets: TypedStringMap<ProjectBuildTarget>
 }
