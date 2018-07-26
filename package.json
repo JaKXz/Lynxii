@@ -4,7 +4,7 @@
   "productName": "Lynxii",
   "description": "A simple and powerful dynamic communications network.",
   "private": true,
-  "main": "index.ts",
+  "main": "lib/index.js",
   "scripts": {
     "add:client": "yarn workspace lynxii-client add",
     "add:core": "yarn workspace lynxii-core add",
