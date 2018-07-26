@@ -17,6 +17,11 @@ declare interface ProjectBuild {
   targets: TypedStringMap<ProjectBuildTarget>
 }
 
+declare interface ProjectLicense {
+  extensions: string[]
+}
+
 declare interface Project {
   build: ProjectBuild
+  license: ProjectLicense
 }

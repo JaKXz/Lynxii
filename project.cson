@@ -17,3 +17,10 @@ build:
       modes:
         tgz: 'tar.gz'
         zip: 'zip'
+
+# Project licensing
+license:
+  extensions: [
+    '.js',
+    '.d.ts'
+  ]

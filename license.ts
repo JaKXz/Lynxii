@@ -1,29 +1,41 @@
-/*!
-  * Automatic license file header generation script for VevoxDigital/Lynxii.
-  * This file is not intended for distribution
-  */
-///<reference path="./index.d.ts"/>
-///<reference path="./workspace.d.ts"/>
+// tslint:disable:no-console
 
-import * as path from 'path'
+/// <reference path="./project.d.ts"/>
+
 import * as pkg from './package.json'
-import * as project from './project.json'
 
-import { promises as fs, Stats, constants as fsConst } from 'fs'
 import { execSync } from 'child_process'
+import { parse } from 'cson'
+import { constants as fsConst, promises as fs, readFileSync, Stats } from 'fs'
+import * as path from 'path'
 
-const commit = execSync('git rev-parse HEAD').toString('utf-8').substring(0, 7).toUpperCase()
+const project = parse(readFileSync('./project.cson').toString('utf8')) as Project
+const commit = execSync('git rev-parse HEAD').toString('utf8').substring(0, 7).toUpperCase()
 
-// the header
+// tslint:disable-next-line:no-string-literal
+if (project['error']) throw new Error(project['error'])
+
 const header = `/*!
- * Copyright ${new Date().getFullYear()} ${pkg.author} under "${pkg.license}". See the LICENSE file for more information.
- * Compiled ${new Date().toUTCString()} from ${commit}
+ * ${pkg.name} is free software: you can redistribute it and/or modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ *
+ * ${pkg.name} is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along with ${pkg.name}. If not,
+ * see http://www.gnu.org/licenses/.
+ *
+ * @commit ${commit}
+ * @compiled ${new Date().toUTCString()}
+ * @author ${pkg.author}
  */
 `
 
 /** Determines if a given file has a valid extension */
 function hasExtension (file: string): boolean {
-  for (const ext of project.licenseExtensions) {
+  for (const ext of project.license.extensions) {
     if (file.endsWith(ext)) return true
   }
 
@@ -62,7 +74,7 @@ async function enterDirectory (dir: string, prefix: string) {
   }
 }
 
-const dir = process.argv.slice(2)[0]
-if (!dir) throw new Error('Must specifiy a directory')
+const target = process.argv.slice(2)[0]
+if (!target) throw new Error('Must specifiy a directory')
 
-enterDirectory(path.resolve(__dirname, dir), dir).catch(console.error)
+enterDirectory(path.resolve(__dirname, target), target).catch(console.error)
