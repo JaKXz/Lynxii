@@ -4,7 +4,7 @@
   "productName": "Lynxii",
   "description": "A simple and powerful dynamic communications network.",
   "private": true,
-  "main": "index.ts",
+  "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/VevoxDigital/Lynxii.git"
@@ -23,7 +23,8 @@
   },
   "homepage": "https://vevox.io/lynxii",
   "scripts": {
-    "start": "node ."
+    "start": "node .",
+    "debug": "node -r ts-node/register ."
   },
   "config": {
     "name": "lynxii-client",

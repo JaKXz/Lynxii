@@ -1,5 +1,5 @@
 
-/// <reference path="./index.d.ts" />
+/// <reference types="lynxii-common" />
 
 declare interface ProjectBuildDirs {
   compiled: string

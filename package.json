@@ -16,7 +16,8 @@
     "__preinstall": "yarn --ignore-scripts -W && grunt update",
     "start:server": "yarn exec:script src/server/index.ts",
     "test": "yarn build",
-    "tsexec": "node -r ts-node/register"
+    "tsexec": "node -r ts-node/register",
+    "update": "grunt exec:update"
   },
   "nyc": {
     "include": [

@@ -57,6 +57,9 @@ export interface ILynxiiLogger {
   /** Data mapping for the prefix */
   readonly prefixData: ReadonlyArray<string>
 
+  /** Whether or not this logger is enabled. When disabled, all logging functions are no-op */
+  enabled: boolean
+
   /**
    * Logs the given message, optionally formatted with the given data
    * @param level The level to log at
@@ -85,7 +88,7 @@ export interface ILynxiiLogger {
    * @param prefix The prefix of the new logger
    * @returns The newly created logger
    */
-  createSublogger: (prefix: string) => ILynxiiLogger
+  sublogger: (prefix: string) => ILynxiiLogger
 }
 
 /**
@@ -97,9 +100,11 @@ export default class LynxiiLoggerImpl extends EventEmitter implements ILynxiiLog
   public readonly parent?: ILynxiiLogger
   public readonly packageName: string
   public readonly prefixData: ReadonlyArray<string>
+  public enabled: boolean = true
 
   private readonly debugger: debug.IDebugger
   private readonly logger: winston.Logger
+  private readonly subLoggers: Map<string, LynxiiLoggerImpl>
 
   /**
    * Creates a new logger from the given prefix and parent
@@ -115,13 +120,18 @@ export default class LynxiiLoggerImpl extends EventEmitter implements ILynxiiLog
     this.prefix = this.prefixData.join(':')
     this.parent = parent
 
-    this.debugger = debug(this.packageName + ':' + this.prefix)
+    this.debugger = debug([ this.packageName ].concat(this.prefixData).join(':'))
     this.logger = createWistonLogger()
+    this.subLoggers = new Map<string, LynxiiLoggerImpl>()
+
+    this.debug('logger created: %o', this.prefixData)
   }
 
   public log (level: LoggingLevel, message: string, ...data: any[]): void {
+    if (!this.enabled) return
+
     if (level === LoggingLevel.DEBUG) this.debugger(message, data)
-    else this.logger.log(LoggingLevel[level], format(message, ...data))
+    else this.logger.log(LoggingLevel[level].toLowerCase(), format(message, ...data))
   }
 
   public debug (message: string, ...data: any[]): void {
@@ -144,7 +154,14 @@ export default class LynxiiLoggerImpl extends EventEmitter implements ILynxiiLog
     this.log(LoggingLevel.ERROR, message, ...data)
   }
 
-  public createSublogger (prefix: string): LynxiiLoggerImpl {
-    return new LynxiiLoggerImpl(prefix, this)
+  public sublogger (prefix: string): LynxiiLoggerImpl {
+    let l = this.subLoggers.get(prefix)
+
+    if (!l) {
+      l = new LynxiiLoggerImpl(prefix, this)
+      this.subLoggers.set(prefix, l)
+    }
+
+    return l
   }
 }

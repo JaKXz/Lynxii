@@ -70,6 +70,7 @@ async function processModule (dir: string): Promise<void> {
     ...literals,
     scripts: {
       start: 'node .',
+      debug: 'node -r ts-node/register .',
       ...scripts
     },
     config: {
