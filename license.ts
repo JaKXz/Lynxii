@@ -9,7 +9,7 @@ import { parse } from 'cson'
 import { constants as fsConst, promises as fs, readFileSync, Stats } from 'fs'
 import * as path from 'path'
 
-const project = parse(readFileSync('./project.cson').toString('utf8')) as Project
+const project = parse(readFileSync('./project.cson').toString('utf8')) as IProject
 const commit = execSync('git rev-parse HEAD').toString('utf8').substring(0, 7).toUpperCase()
 
 // tslint:disable-next-line:no-string-literal

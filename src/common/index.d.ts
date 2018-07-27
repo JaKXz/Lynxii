@@ -1,13 +1,13 @@
 /** A mapping of string keys to a specific value type */
-declare interface TypedStringMap<T> {
+declare interface ITypedStringMap<T> {
   [key: string]: T
 }
 
 /** A mapping of string keys to any value */
-declare interface StringMap extends TypedStringMap<any> { }
+declare interface IStringMap extends ITypedStringMap<any> { }
 
 declare namespace Package {
-  interface Root {
+  interface IRoot {
     /** The package's internal name */
     readonly name: string
 
@@ -27,16 +27,16 @@ declare namespace Package {
     readonly homepage?: string
 
     /** A tracker to report bugs too */
-    readonly bugs?: string | Package.Bugs
+    readonly bugs?: string | IBugs
 
     /** The license that this package is available under */
     readonly license?: string
 
     /** The author of the package */
-    readonly author?: string | Package.Author
+    readonly author?: string | IAuthor
 
     /** Any additional contributors to the package */
-    readonly contributors?: string[] | Package.Author[]
+    readonly contributors?: string[] | IAuthor[]
 
     /** An array of files to include in publishing */
     readonly files?: string[]
@@ -45,40 +45,40 @@ declare namespace Package {
     readonly main?: string
 
     /** Any binary commands available to the package */
-    readonly bin?: string | TypedStringMap<string>
+    readonly bin?: string | ITypedStringMap<string>
 
     /** Documentation for this pacakage */
     readonly man?: string | string[]
 
     /** The location of certain package directories */
-    readonly directories?: Package.Directories
+    readonly directories?: IDirectories
 
     /** The version control repository for this package */
-    readonly repository?: string | Package.Repository
+    readonly repository?: string | IRepository
 
     /** The scripts for the package */
-    readonly scripts?: TypedStringMap<string>
+    readonly scripts?: ITypedStringMap<string>
 
     /** The package's configuration data */
-    readonly config?: Package.Config
+    readonly config?: IConfig
 
     /** A mapping of the package dependencies to their versions */
-    readonly dependencies?: TypedStringMap<string>
+    readonly dependencies?: ITypedStringMap<string>
 
     /** A mapping of the package development-only dependencies to their versions */
-    readonly devDependencies?: TypedStringMap<string>
+    readonly devDependencies?: ITypedStringMap<string>
 
     /** A mapping of the package peer dependencies to their versions */
-    readonly peerDependencies?: TypedStringMap<string>
+    readonly peerDependencies?: ITypedStringMap<string>
 
     /** A mapping of the package optional dependencies to their versions */
-    readonly optionalDependencies?: TypedStringMap<string>
+    readonly optionalDependencies?: ITypedStringMap<string>
 
     /** An array of dependencies that come bundled */
     readonly bundledDependencies?: string[]
 
     /** The engines this package runs on */
-    readonly engines?: Package.Engines
+    readonly engines?: IEngines
 
     /** The list of OSes this package runs on */
     readonly os?: string[]
@@ -93,13 +93,13 @@ declare namespace Package {
     readonly private?: boolean
 
     /** Speciallized configuration for publishing */
-    readonly publishConfig?: Package.PublishConfig
+    readonly publishConfig?: IPublishConfig
 
     /** A list of workspace globs for yarn */
     readonly workspaces?: string[]
   }
 
-  interface Author {
+  interface IAuthor {
     /** The author's name */
     name: string
 
@@ -113,7 +113,7 @@ declare namespace Package {
     homepage?: string
   }
 
-  interface Bugs {
+  interface IBugs {
     /** An email to send bugs to */
     email: string
 
@@ -122,7 +122,7 @@ declare namespace Package {
   }
 
   /** The location of certain package directories */
-  interface Directories {
+  interface IDirectories {
     lib?: string
     bin?: string
     man?: string
@@ -131,27 +131,27 @@ declare namespace Package {
   }
 
   /** The engines this package is designed for */
-  interface Engines {
+  interface IEngines {
     node?: string
     npm?: string
   }
 
   /** The configuration data managed by NPM */
-  interface Config {
+  interface IConfig {
     /** The NPM namespace for the config command */
     name?: string
 
     /** The configuration data */
-    config?: StringMap
+    config?: IStringMap
   }
 
   /** The publishing configuration this package */
-  interface PublishConfig {
+  interface IPublishConfig {
     registry?: string
   }
 
   /** A project repository */
-  interface Repository {
+  interface IRepository {
     /** The type of repository */
     type: string
 
@@ -161,7 +161,7 @@ declare namespace Package {
 }
 
 declare module '*/package.json' {
-  const pkg: Package.Root
+  const pkg: Package.IRoot
   export = pkg
 }
 

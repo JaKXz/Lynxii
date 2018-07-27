@@ -1,36 +1,36 @@
 
 /// <reference types="lynxii-common" />
 
-declare interface ProjectBuildDirs {
+declare interface IProjectBuildDirs {
   compiled: string
   target: string
 }
 
-declare interface ProjectBuildTarget {
-  modes: TypedStringMap<string>
+declare interface IProjectBuildTarget {
+  modes: ITypedStringMap<string>
 }
 
-declare interface ProjectBuild {
+declare interface IProjectBuild {
   output: string
   coverage: string
-  dirs: ProjectBuildDirs
-  targets: TypedStringMap<ProjectBuildTarget>
+  dirs: IProjectBuildDirs
+  targets: ITypedStringMap<IProjectBuildTarget>
 }
 
-declare interface ProjectLicense {
+declare interface IProjectLicense {
   extensions: string[]
 }
 
-declare interface ProjectModules {
+declare interface IProjectModules {
   forwards: string[]
-  overrides: TypedStringMap<StringMap>
-  scripts: TypedStringMap<TypedStringMap<string>>
-  config: TypedStringMap<StringMap>
-  links: TypedStringMap<string[]>
+  overrides: ITypedStringMap<IStringMap>
+  scripts: ITypedStringMap<ITypedStringMap<string>>
+  config: ITypedStringMap<IStringMap>
+  links: ITypedStringMap<string[]>
 }
 
-declare interface Project {
-  build: ProjectBuild
-  license: ProjectLicense
-  modules: ProjectModules
+declare interface IProject {
+  build: IProjectBuild
+  license: IProjectLicense
+  modules: IProjectModules
 }

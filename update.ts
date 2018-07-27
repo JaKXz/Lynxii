@@ -11,7 +11,7 @@ import * as glob from 'glob'
 import { basename, join } from 'path'
 import { promisify } from 'util'
 
-const project = parse(readFileSync('./project.cson').toString('utf8')) as Project
+const project = parse(readFileSync('./project.cson').toString('utf8')) as IProject
 const { modules } = project
 
 /**
@@ -46,16 +46,16 @@ async function processModule (dir: string): Promise<void> {
 
   const handle = await fs.open(packagePath, fsConst.O_RDWR | fsConst.O_CREAT)
   const bufferIn = await handle.readFile()
-  const currentPackage = JSON.parse(bufferIn.toString('utf-8')) as Package.Root
+  const currentPackage = JSON.parse(bufferIn.toString('utf-8')) as Package.IRoot
 
-  const forwards: Package.Root = {
+  const forwards: Package.IRoot = {
     name: `${pkg.name}-${moduleName}`,
     version: `${pkg.version}+${moduleName}`
   }
   for (const key of modules.forwards) forwards[key] = pkg[key]
 
   const links = modules.links[moduleName]
-  let peerDependencies: TypedStringMap<string> | undefined
+  let peerDependencies: ITypedStringMap<string> | undefined
   if (links) {
     peerDependencies = { }
     for (const link of links) peerDependencies[`${pkg.name}-${link}`] = pkg.version
@@ -65,7 +65,7 @@ async function processModule (dir: string): Promise<void> {
   const scripts = modules.scripts[moduleName] || { }
 
   // tslint:disable:object-literal-sort-keys
-  const newPackage: Package.Root = {
+  const newPackage: Package.IRoot = {
     ...forwards,
     ...literals,
     scripts: {

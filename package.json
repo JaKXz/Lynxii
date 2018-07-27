@@ -42,7 +42,10 @@
     "type": "git",
     "url": "git+https://github.com/VevoxDigital/Lynxii.git"
   },
-  "author": "Vevox Digital",
+  "author": {
+    "name": "Vevox Digital",
+    "homepage": "https://vevox.io"
+  },
   "contributors": [
     {
       "id": "CynicalBusiness",
