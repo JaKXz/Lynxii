@@ -28,5 +28,12 @@
   "config": {
     "name": "lynxii-common",
     "config": {}
+  },
+  "devDependencies": {
+    "@types/debug": "^0.0.30"
+  },
+  "dependencies": {
+    "debug": "^3.1.0",
+    "winston": "^3.0.0"
   }
 }
