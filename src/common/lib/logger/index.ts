@@ -127,11 +127,23 @@ export default class LynxiiLoggerImpl extends EventEmitter implements ILynxiiLog
     this.debug('logger created: %o', this.prefixData)
   }
 
+  public on (event: 'message', listener: (message: string, data: any[]) => void): this
+  public on (event: string, listener: (...data: any[]) => void): this {
+    return super.on(event, listener)
+  }
+
+  public emit (event: 'message', message: string, data: any[]): boolean
+  public emit (event: string, ...data: any[]): boolean {
+    return super.emit(event, ...data)
+  }
+
   public log (level: LoggingLevel, message: string, ...data: any[]): void {
     if (!this.enabled) return
 
+    const formatted = format(message, ...data)
     if (level === LoggingLevel.DEBUG) this.debugger(message, data)
-    else this.logger.log(LoggingLevel[level].toLowerCase(), format(message, ...data))
+    else this.logger.log(LoggingLevel[level].toLowerCase(), formatted)
+    this.emit('message', formatted, [ message ].concat(data))
   }
 
   public debug (message: string, ...data: any[]): void {
